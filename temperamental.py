@@ -10,23 +10,13 @@ import subprocess
 currentTDP = 0
 targetTDP = 0
 defaultTDP = 0
+
 SMT = ''
-DEFAULT_SMT = subprocess.getoutput('cat /sys/devices/system/cpu/smt/control')
-SMT_TOGGLE = False
 BOOST = ''
+
+# Grab current values before changes
+DEFAULT_SMT = subprocess.getoutput('cat /sys/devices/system/cpu/smt/control')
 DEFAULT_BOOST = subprocess.getoutput('cat /sys/devices/system/cpu/cpufreq/boost')
-BOOST_TOGGLE = False
-
-# Grab current stats
-
-if subprocess.getoutput('cat /sys/devices/system/cpu/smt/control') == 'on':
-   SMT = "SMT Enabled"
-else:
-   SMT = "SMT Disabled"
-if subprocess.getoutput('cat /sys/devices/system/cpu/cpufreq/boost') == '1':
-   BOOST = "Boost Enabled"
-else:
-   BOOST = "Boost Disabled"
    
 pygame.init()
 
@@ -48,59 +38,114 @@ manager = pygame_gui.UIManager((800,600))
 
 # Buttons
 button1 = pygame_gui.elements.UIButton(
-                            relative_rect=pygame.Rect(50,50,100,100),
-                            text='5w TDP',
+                            relative_rect=pygame.Rect(0,200,100,100),
+                            text='5W TDP',
                             manager=manager
                         )
 button2 = pygame_gui.elements.UIButton(
-                            relative_rect=pygame.Rect(50,150,100,100),
-                            text='10w TDP',
+                            relative_rect=pygame.Rect(0,300,100,100),
+                            text='10W TDP',
                             manager=manager
                         )
 button3 = pygame_gui.elements.UIButton(
-                            relative_rect=pygame.Rect(50,250,100,100),
-                            text='15w TDP',
+                            relative_rect=pygame.Rect(0,400,100,100),
+                            text='15W TDP',
                             manager=manager
                         )
 button4 = pygame_gui.elements.UIButton(
-                            relative_rect=pygame.Rect(50,350,100,100),
-                            text='25w TDP',
+                            relative_rect=pygame.Rect(0,500,100,100),
+                            text='25W TDP',
                             manager=manager
                         )
 button5 = pygame_gui.elements.UIButton(
-                            relative_rect=pygame.Rect(300,250,175,30),
+                            relative_rect=pygame.Rect(100,510,175,30),
                             text='Restore Defaults',
                             manager=manager
                         )
 button6 = pygame_gui.elements.UIButton(
-                            relative_rect=pygame.Rect(300,450,175,30),
+                            relative_rect=pygame.Rect(100,570,175,30),
                             text='Toggle SMT',
                             manager=manager
                         )
 button7 = pygame_gui.elements.UIButton(
-                            relative_rect=pygame.Rect(300,350,175,30),
+                            relative_rect=pygame.Rect(100,540,175,30),
                             text='Toggle CPU Boost',
                             manager=manager
                         )
 # HUD information
 label1 = pygame_gui.elements.UILabel(
-                            relative_rect=pygame.Rect(0,-25,200,100),
-                            text="Set TDP Value",
+                            relative_rect=pygame.Rect(100,350,200,100),
+                            text="Current Power Draw",
                             manager=manager
 )
 label2 = pygame_gui.elements.UILabel(
-                            relative_rect=pygame.Rect(475,-25,200,100),
+                            relative_rect=pygame.Rect(100,375,200,100),
                             text="Current TDP Value",
                             manager=manager
 )
 label3 = pygame_gui.elements.UILabel(
-                            relative_rect=pygame.Rect(150,-25,200,100),
+                            relative_rect=pygame.Rect(100,400,200,100),
                             text=BOOST,
                             manager=manager
 )
 label4 = pygame_gui.elements.UILabel(
-                            relative_rect=pygame.Rect(325,-25,200,100),
+                            relative_rect=pygame.Rect(100,425,200,100),
                             text=SMT,
+                            manager=manager
+)
+label5 = pygame_gui.elements.UILabel(
+                            relative_rect=pygame.Rect(-50,0,200,100),
+                            text="CPU Name",
+                            manager=manager
+)
+label6 = pygame_gui.elements.UILabel(
+                            relative_rect=pygame.Rect(-50,25,200,100),
+                            text="GPU Name",
+                            manager=manager
+)
+label7 = pygame_gui.elements.UILabel(
+                            relative_rect=pygame.Rect(-47,50,200,100),
+                            text="CPU Cores",
+                            manager=manager
+)
+label8 = pygame_gui.elements.UILabel(
+                            relative_rect=pygame.Rect(-30,75,200,100),
+                            text="CPU Frequency",
+                            manager=manager
+)
+label9 = pygame_gui.elements.UILabel(
+                            relative_rect=pygame.Rect(-30,100,200,100),
+                            text="GPU Frequency",
+                            manager=manager
+)
+label10 = pygame_gui.elements.UILabel(
+                            relative_rect=pygame.Rect(-46,125,200,100),
+                            text="Fan Speed",
+                            manager=manager
+)
+label11 = pygame_gui.elements.UILabel(
+                            relative_rect=pygame.Rect(550,0,225,100),
+                            text="Power Profile: Performance",
+                            manager=manager
+)
+label12 = pygame_gui.elements.UILabel(
+                            relative_rect=pygame.Rect(514,25,225,100),
+                            text="Fan Curve: Custom",
+                            manager=manager
+)
+label13 = pygame_gui.elements.UILabel(
+                            relative_rect=pygame.Rect(527,50,225,100),
+                            text="HHFC Status: Enabled",
+                            manager=manager
+)
+label14 = pygame_gui.elements.UILabel(
+                            relative_rect=pygame.Rect(523,75,225,100),
+                            text="Ryzenadj: Not Found",
+                            manager=manager
+)
+label15 = pygame_gui.elements.UILabel(
+                            relative_rect=pygame.Rect(225,-25,350,100),
+                            text="Loaded Profile: One XPlayer Mini 5800U",
                             manager=manager
 )
 
@@ -112,7 +157,7 @@ while isRunning:
 
     time_delta = clock.tick(60)/1000.0
     window_surface.blit(background,(0,0))
-    window_surface.fill((25,20,100))
+    window_surface.fill((64,64,64))
     
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -122,38 +167,50 @@ while isRunning:
             if event.user_type == pygame_gui.UI_BUTTON_PRESSED:
             
                 if event.ui_element == button6:
-                    SMT_TOGGLE = not SMT_TOGGLE
-                    if SMT_TOGGLE == True:
-                       SMT = 'on'
-                    else:
+
+                    if subprocess.getoutput('cat /sys/devices/system/cpu/smt/control') == 'on':
                        SMT = 'off'
+                    else:
+                       SMT = 'on'
                     subprocess.run('/usr/bin/echo ' + SMT + ' > /sys/devices/system/cpu/smt/control', shell=True)
                     
                 if event.ui_element == button7:
-                    BOOST_TOGGLE = not BOOST_TOGGLE
-                    if BOOST_TOGGLE == True:
-                       BOOST = '1'
-                    else:
+                
+                    if subprocess.getoutput('cat /sys/devices/system/cpu/cpufreq/boost') == '1':
                        BOOST = '0'
+                    else:
+                       BOOST = '1'
                     subprocess.run('/usr/bin/echo ' +  BOOST + ' > /sys/devices/system/cpu/cpufreq/boost', shell=True)
                     
                 if event.ui_element == button5:
                    subprocess.run('/usr/bin/echo ' +  DEFAULT_BOOST + ' > /sys/devices/system/cpu/cpufreq/boost', shell=True)
                    subprocess.run('/usr/bin/echo ' +  DEFAULT_SMT + ' > /sys/devices/system/cpu/smt/control', shell=True)
                    
-        if SMT == 'on':
+        # Update Hud Values       
+        if subprocess.getoutput('cat /sys/devices/system/cpu/smt/control') == 'on':
            label4.set_text("SMT Enabled")
         else:
            label4.set_text("SMT Disabled")
-        if BOOST == '1':
+        if subprocess.getoutput('cat /sys/devices/system/cpu/cpufreq/boost') == '1':
            label3.set_text("Boost Enabled")
         else:
            label3.set_text("Boost Disabled")
                    
     # Gamepad inputs are yet to be implemented
-
         if event.type == pygame.JOYBUTTONDOWN:
-            print(event)
+           if event.button == 0:
+              print("Set TDP to 5W")
+           if event.button == 1:
+              print("Set TDP to 10W")
+           if event.button == 2:
+              print("Set TDP to 15W")
+           if event.button == 3:
+              print("Set TDP to MAX")
+           if event.button == 4:
+              print("Toggle Boost")
+           if event.button == 5:
+              print("Toggle SMT")
+           print(event)
         if event.type == pygame.JOYBUTTONUP:
             print(event)
     
