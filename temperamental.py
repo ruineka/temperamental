@@ -4,6 +4,7 @@ import pygame
 import pygame_gui
 import os
 import subprocess
+import time
 
 # Define variables
 
@@ -14,9 +15,13 @@ defaultTDP = 0
 SMT = ''
 BOOST = ''
 
+RYZENADJ='/usr/bin/ryzenadj'
+PARAMS=''
+
 # Grab current values before changes
 DEFAULT_SMT = subprocess.getoutput('cat /sys/devices/system/cpu/smt/control')
 DEFAULT_BOOST = subprocess.getoutput('cat /sys/devices/system/cpu/cpufreq/boost')
+subprocess.run(RYZENADJ + ' ' + '-i', shell=True)
    
 pygame.init()
 
@@ -70,6 +75,16 @@ button6 = pygame_gui.elements.UIButton(
 button7 = pygame_gui.elements.UIButton(
                             relative_rect=pygame.Rect(100,540,175,30),
                             text='Toggle CPU Boost',
+                            manager=manager
+                        )
+button8 = pygame_gui.elements.UIButton(
+                            relative_rect=pygame.Rect(550,250,175,30),
+                            text='Toggle Performance Mode',
+                            manager=manager
+                        )
+button9 = pygame_gui.elements.UIButton(
+                            relative_rect=pygame.Rect(550,200,175,30),
+                            text='Toggle Power Saver Mode',
                             manager=manager
                         )
 # HUD information
@@ -145,7 +160,12 @@ label14 = pygame_gui.elements.UILabel(
 )
 label15 = pygame_gui.elements.UILabel(
                             relative_rect=pygame.Rect(225,-25,350,100),
-                            text="Loaded Profile: One XPlayer Mini 5800U",
+                            text="System Name: " + subprocess.getoutput('cat /sys/devices/virtual/dmi/id/product_name'),
+                            manager=manager
+)
+textbox1 = pygame_gui.elements.UITextBox(
+                            relative_rect=pygame.Rect(350,400,350,200),
+                            html_text=subprocess.getoutput(RYZENADJ + ' ' + '-i'),
                             manager=manager
 )
 
@@ -173,9 +193,25 @@ while isRunning:
                     else:
                        SMT = 'on'
                     subprocess.run('/usr/bin/echo ' + SMT + ' > /sys/devices/system/cpu/smt/control', shell=True)
+            
+                if event.ui_element == button1:
+                    PARAMS='--stapm-limit=5000 --fast-limit=5000 --slow-limit=5000 --tctl-temp=90'
+                    subprocess.run(RYZENADJ + ' ' + PARAMS, shell=True)
+                    
+                if event.ui_element == button2:
+                    PARAMS='--stapm-limit=10000 --fast-limit=10000 --slow-limit=10000 --tctl-temp=90'
+                    subprocess.run(RYZENADJ + ' ' + PARAMS, shell=True)
+                    
+                if event.ui_element == button3:
+                    PARAMS='--stapm-limit=15000 --fast-limit=15000 --slow-limit=15000 --tctl-temp=90'
+                    subprocess.run(RYZENADJ + ' ' + PARAMS, shell=True)     
+                         
+                if event.ui_element == button4:
+                   print("For safety reasons 25W target is disabled in code for now")
+                    #PARAMS='--stapm-limit=25000 --fast-limit=25000 --slow-limit=25000 --tctl-temp=90'
+                    #subprocess.run(RYZENADJ + ' ' + PARAMS, shell=True)
                     
                 if event.ui_element == button7:
-                
                     if subprocess.getoutput('cat /sys/devices/system/cpu/cpufreq/boost') == '1':
                        BOOST = '0'
                     else:
@@ -185,6 +221,14 @@ while isRunning:
                 if event.ui_element == button5:
                    subprocess.run('/usr/bin/echo ' +  DEFAULT_BOOST + ' > /sys/devices/system/cpu/cpufreq/boost', shell=True)
                    subprocess.run('/usr/bin/echo ' +  DEFAULT_SMT + ' > /sys/devices/system/cpu/smt/control', shell=True)
+                   
+                if event.ui_element == button8:
+                    PARAMS='--max-performance'
+                    subprocess.run(RYZENADJ + ' ' + PARAMS, shell=True)
+                    
+                if event.ui_element == button9:
+                    PARAMS='--power-saving'
+                    subprocess.run(RYZENADJ + ' ' + PARAMS, shell=True)
                    
         # Update Hud Values       
         if subprocess.getoutput('cat /sys/devices/system/cpu/smt/control') == 'on':
