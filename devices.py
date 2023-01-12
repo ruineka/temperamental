@@ -17,16 +17,25 @@ if system_id in (
         STEP_ONE='10000'
         STEP_TWO='15000'
         MAX_TDP='28000'
+        QUIET_FAN_CONFIG="/usr/share/temperamental/profiles/AOKZOE-MINIPRO-QUIET.yaml"
+        BALANCED_FAN_CONFIG="/usr/share/temperamental/profiles/AOKZOE-MINIPRO-BALANCED.yaml"
+        PERF_FAN_CONFIG="/usr/share/temperamental/profiles/AOKZOE-MINIPRO-PERF.yaml"
 elif system_id == "Dev One Notebook PC":
    MIN_TDP="5000"
    STEP_ONE="10000"
    STEP_TWO='12000'
    MAX_TDP='15000'
+   QUIET_FAN_CONFIG=""
+   BALANCED_FAN_CONFIG=""
+   PERF_FAN_CONFIG=""
 elif system_id == "ONE XPLAYER":
    MIN_TDP="5000"
    STEP_ONE="10000"
    STEP_TWO='15000'
    MAX_TDP='25000'
+   QUIET_FAN_CONFIG="/usr/share/temperamental/profiles/AOKZOE-MINIPRO-QUIET.yaml"
+   BALANCED_FAN_CONFIG="/usr/share/temperamental/profiles/AOKZOE-MINIPRO-BALANCED.yaml"
+   PERF_FAN_CONFIG="/usr/share/temperamental/profiles/AOKZOE-MINIPRO-PERF.yaml"
 else:
    print(system_id + " " + "is not currently compatible, if you know the limitations of your hardware you can add support on your own")
    sys.exit(-1)

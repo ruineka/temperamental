@@ -1,0 +1,37 @@
+INTERVAL: 0.5
+
+SENSORS:
+  - name: "cpu"
+    driver_name: "k10temp"
+    temp_input: "temp1_input"
+    divisor: 1000
+    offset: 0
+  - name: "gpu"
+    driver_name: "amdgpu"
+    temp_input: "temp1_input"
+    divisor: 1000
+    offset: 0
+FANS:
+  - name: "fan1"
+    driver_name: "oxpec"
+    handle: "pwm1"
+    max_control_value: 255
+    min_control_value: 0
+    fan_input: "fan1_input"
+    allow_shutoff: "yes"
+    minimum_duty_cycle: 25
+    sensors:
+      - name: "cpu"
+        curve: [
+         [40, 0],
+         [50, 30],
+         [60, 50],
+         [70, 100]
+        ]
+      - name: "gpu"
+        curve: [
+         [40, 0],
+         [50, 30],
+         [60, 50],
+         [70, 100]
+        ]
