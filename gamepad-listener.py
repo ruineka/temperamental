@@ -8,6 +8,7 @@ controller_names = (
         'Generic X-Box pad',
         'OneXPlayer Gamepad',
         'Sony Interactive Entertainment Wireless Controller',
+        'Handheld Controller',
         )
 global gamepad
 # Identify system input event devices.
