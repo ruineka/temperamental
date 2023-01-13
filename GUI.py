@@ -413,7 +413,7 @@ def draw_ui():
                                       manager=manager
                                   )
           APPLY_CHANGES = pygame_gui.elements.UIButton(
-                                      relative_rect=pygame.Rect(865,420,150,25),
+                                      relative_rect=pygame.Rect(900,417,140,25),
                                       text='Apply Changes',
                                       manager=manager
                                   )
