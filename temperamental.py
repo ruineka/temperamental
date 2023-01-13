@@ -76,7 +76,7 @@ def update_hud():
        else:
           GUI.BOOST_LABEL.set_text("Boost Disabled")
           
-def gamepad_events(event):
+def gamepad_button_events(event):
 
    print("running gamepad events")
    print(event)
@@ -99,10 +99,15 @@ def gamepad_events(event):
       print(event)
       
 def get_axis(event):
-    if gamepad.get_hat(0) == (1,0):
+    hats = gamepad.get_numhats()
+
+    for i in range(hats):
+     hat = gamepad.get_hat(i)
+
+    if gamepad.get_hat(i) == (1,0):
        GUI.currentTDP = GUI.currentTDP + 1
        print("right d pad")
-    if gamepad.get_hat(0) == (-1,0):
+    if gamepad.get_hat(i) == (-1,0):
        GUI.currentTDP = GUI.currentTDP - 1
        print("left d pad") 
 
@@ -160,6 +165,7 @@ def keyboard_mouse_events(event):
     if event.ui_element == GUI.BALANCED_FAN:
        subprocess.run(HHFC + ' ' + BALANCED_FAN_CONFIG, shell=True)
        GUI.FAN_CURVE_LABEL.set_text("Fan Curve: Balanced")
+       
     if event.ui_element == GUI.PERFORMANCE_FAN:
        subprocess.run(HHFC + ' ' + PERF_FAN_CONFIG, shell=True)
        GUI.FAN_CURVE_LABEL.set_text("Fan Curve: Performance")
@@ -178,25 +184,15 @@ def keyboard_mouse_events(event):
     if event.ui_element == GUI.APPLY_CHANGES:
        print("Writing" + " " + TARGET_TDP + " " + "with Ryzenadj")
        subprocess.run(RYZENADJ + ' ' + "--stapm-limit=" + TARGET_TDP + " " + "--fast-limit=" + TARGET_TDP + " " + "--slow-limit=" + TARGET_TDP + " " + "--tctl-temp=90", shell=True)  
-                 
-def gamepad_hotplug(event, id):
-      # Handle hotplugging
-   global gamepad
-   gamepad = pygame.joystick.Joystick(id)
-
-   if event.type == pygame.JOYDEVICEADDED:
-      gamepad.init()
-
-   if event.type == pygame.JOYDEVICEREMOVED:
-      gamepad.quit()
 
 def __main__():
-   #pygame.joystick.init()
-   joysticks = [pygame.joystick.Joystick(i) for i in range(pygame.joystick.get_count())]
-   for joystick in joysticks:
-       print(joystick.get_name() + " connected!")
-       
+
+   global gamepad
+
+   joysticks = {}
+   pygame.init()
    isRunning = True
+
    while isRunning:
    
        time_delta = clock.tick(60)/1000.0
@@ -207,7 +203,6 @@ def __main__():
        for event in pygame.event.get():
            if event.type == pygame.QUIT:
                isRunning = False
-           gamepad_hotplug(event, joystick.get_id())
     
            if event.type == pygame.USEREVENT:
            
@@ -217,10 +212,21 @@ def __main__():
 
            if event.type == pygame.JOYBUTTONDOWN:
               print(event)
-              gamepad_events(event)
+              gamepad_button_events(event)
 
+            # Handle hotplugging
+           if event.type == pygame.JOYDEVICEADDED:
+
+               gamepad = pygame.joystick.Joystick(event.device_index)
+               joysticks[gamepad.get_instance_id()] = gamepad
+               print(f"Joystick {gamepad.get_instance_id()} connencted")
+
+           if event.type == pygame.JOYDEVICEREMOVED:
+               del joysticks[event.instance_id]
+               print(f"Joystick {event.instance_id} disconnected")
+               
           # if event.type == pygame.JOYBUTTONUP:
-           #   gamepad_events(event)
+           #   gamepad_button_events(event)
            
            if event.type == pygame.JOYAXISMOTION:
               get_axis(event)
