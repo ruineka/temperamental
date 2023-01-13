@@ -343,22 +343,22 @@ def draw_ui():
 
        case "Steam Deck":
           MIN_BUTTON = pygame_gui.elements.UIButton(
-                                       relative_rect=pygame.Rect(340,250,100,25),
+                                       relative_rect=pygame.Rect(420,280,100,25),
                                        text=str(int(MIN_TDP) // 1000) + "W TDP",
                                        manager=manager
                                    )
           TIER1_BUTTON = pygame_gui.elements.UIButton(
-                                      relative_rect=pygame.Rect(320,280,100,25),
+                                      relative_rect=pygame.Rect(320,260,100,25),
                                       text=str(int(STEP_ONE) // 1000) + "W TDP",
                                       manager=manager
                                   )
           TIER2_BUTTON = pygame_gui.elements.UIButton(
-                                      relative_rect=pygame.Rect(835,250,100,25),
+                                      relative_rect=pygame.Rect(855,260,100,25),
                                       text=str(int(STEP_TWO) // 1000) + "W TDP",
                                       manager=manager
                                   )
           MAX_BUTTON = pygame_gui.elements.UIButton(
-                                      relative_rect=pygame.Rect(855,280,100,25),
+                                      relative_rect=pygame.Rect(755,280,100,25),
                                       text=str(int(MAX_TDP) // 1000) + "W TDP",
                                       manager=manager
                                   )
@@ -388,7 +388,7 @@ def draw_ui():
                                       manager=manager
                                   )
           CLOSE_BUTTON = pygame_gui.elements.UIButton(
-                                      relative_rect=pygame.Rect(860,355,70,25),
+                                      relative_rect=pygame.Rect(894,340,140,25),
                                       text='Close',
                                       manager=manager
                                   )
@@ -403,12 +403,12 @@ def draw_ui():
                                       manager=manager
                                   )
           POSITIVE_INCREMENT_BUTTON = pygame_gui.elements.UIButton(
-                                      relative_rect=pygame.Rect(325,495,75,25),
+                                      relative_rect=pygame.Rect(300,417,75,25),
                                       text='+',
                                       manager=manager
                                   )
           NEGATIVE_INCREMENT_BUTTON = pygame_gui.elements.UIButton(
-                                      relative_rect=pygame.Rect(335,390,75,25),
+                                      relative_rect=pygame.Rect(300,382,75,25),
                                       text='-',
                                       manager=manager
                                   )
