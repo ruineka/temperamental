@@ -1,9 +1,5 @@
 #!/bin/python3
-import pygame
-import pygame_gui
-import os
-import subprocess
-import os.path
+
 import sys
 
 system_id = open("/sys/devices/virtual/dmi/id/product_name", "r").read().strip()
@@ -13,6 +9,7 @@ if system_id in (
         "ONEXPLAYER Mini Pro",
         "AOKZOE A1 AR07"
         ):
+        SYSTEM_NAME = system_id
         MIN_TDP='5000'
         STEP_ONE='10000'
         STEP_TWO='15000'
@@ -21,6 +18,7 @@ if system_id in (
         BALANCED_FAN_CONFIG="/usr/share/temperamental/profiles/AOKZOE-MINIPRO-BALANCED.yaml"
         PERF_FAN_CONFIG="/usr/share/temperamental/profiles/AOKZOE-MINIPRO-PERF.yaml"
 elif system_id == "Dev One Notebook PC":
+   SYSTEM_NAME = system_id
    MIN_TDP="5000"
    STEP_ONE="10000"
    STEP_TWO='12000'
@@ -29,6 +27,7 @@ elif system_id == "Dev One Notebook PC":
    BALANCED_FAN_CONFIG=""
    PERF_FAN_CONFIG=""
 elif system_id == "ONE XPLAYER":
+   SYSTEM_NAME = system_id
    MIN_TDP="5000"
    STEP_ONE="10000"
    STEP_TWO='15000'
