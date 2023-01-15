@@ -7,7 +7,6 @@ import os.path
 import subprocess
 import sys
 import GUI
-from playsound import playsound
 from os import path
 from devices import MIN_TDP, STEP_ONE, STEP_TWO, MAX_TDP, QUIET_FAN_CONFIG, BALANCED_FAN_CONFIG, PERF_FAN_CONFIG
 
@@ -264,7 +263,6 @@ def __main__():
             if event.type == pygame.USEREVENT:
 
                 if event.user_type == pygame_gui.UI_BUTTON_PRESSED:
-                    playsound("assets/sfx/click.mp3")
                     keyboard_mouse_events(event)
 
             if event.type == pygame.JOYBUTTONDOWN:
