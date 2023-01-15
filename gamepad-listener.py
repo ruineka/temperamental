@@ -2,7 +2,7 @@
 
 import asyncio, evdev
 import subprocess
-from evdev import InputDevice, InputEvent, UInput, ecodes as e, list_devices, ff
+from evdev import InputDevice, InputEvent, categorize, UInput, ecodes as e, list_devices, ff
 controller_names = (
         'Microsoft X-Box 360 pad',
         'Generic X-Box pad',
@@ -20,8 +20,12 @@ except:
 async def print_events(device):
     async for event in device.async_read_loop():
         active = gamepad.active_keys()
-        if active == [307, 315]:
-           subprocess.run("./temperamental.py")
+        
+        if event.type == 1 and active != []:
+           print("Currently pressed button IDs")
+           print(active)
+        if active == [317, 318] and event.type == 1 and active != []:
+           subprocess.run("./inject-gamescope.sh")
 
 
 for device in devices_original:
