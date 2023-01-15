@@ -88,7 +88,7 @@ def draw_ui():
                 manager=manager
             )
             DEFAULT_BUTTON = pygame_gui.elements.UIButton(
-                relative_rect=pygame.Rect(275, 500, 175, 40),
+                relative_rect=pygame.Rect(460, 508, 350, 50),
                 text='Restore Defaults',
                 manager=manager
             )
@@ -164,12 +164,12 @@ def draw_ui():
                 manager=manager
             )
             BOOST_LABEL = pygame_gui.elements.UILabel(
-                relative_rect=pygame.Rect(1100, 150, 150, 50),
+                relative_rect=pygame.Rect(850, 100, 150, 50),
                 text=BOOST,
                 manager=manager
             )
             SMT_LABEL = pygame_gui.elements.UILabel(
-                relative_rect=pygame.Rect(1100, 200, 150, 50),
+                relative_rect=pygame.Rect(1050, 100, 150, 50),
                 text=SMT,
                 manager=manager
             )
