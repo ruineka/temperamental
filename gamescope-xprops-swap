@@ -9,7 +9,7 @@ sleep 1 # wait a bit for game window
 RESULT=`xwininfo -display $DISPLAY -root -tree | grep "^     0x" | grep -E "[0-9]{3}x[0-9]{3}" | grep -v \"Steam\"\: | grep -v \"SteamOverlay\"\: | grep -v \"steamwebhelper\"`
 WIN_ID=`echo $RESULT | cut -d' ' -f 1`
 
-ORIGINAL=`xprop -display :1 -root | grep GAMESCOPECTRL_BASELAYER_APPID | cut -d'=' -f 2`
+ORIGINAL=`xprop -display :0 -root | grep GAMESCOPECTRL_BASELAYER_APPID | cut -d'=' -f 2`
 
 # apply STEAM_GAME property to game window so steamos compositor shows game in foreground
 xprop -display $DISPLAY -id $WIN_ID -f STEAM_GAME 32c -set STEAM_GAME 1
