@@ -68,22 +68,22 @@ def draw_ui():
     match system_name:
         case "ONE XPLAYER":
             MIN_BUTTON = pygame_gui.elements.UIButton(
-                relative_rect=pygame.Rect(878, 382, 100, 25),
+                relative_rect=pygame.Rect(878, 382, 150, 25),
                 text=str(int(MIN_TDP) // 1000) + "W TDP",
                 manager=manager
             )
             TIER1_BUTTON = pygame_gui.elements.UIButton(
-                relative_rect=pygame.Rect(878, 355, 100, 25),
+                relative_rect=pygame.Rect(878, 355, 135, 25),
                 text=str(int(STEP_ONE) // 1000) + "W TDP",
                 manager=manager
             )
             TIER2_BUTTON = pygame_gui.elements.UIButton(
-                relative_rect=pygame.Rect(878, 328, 100, 25),
+                relative_rect=pygame.Rect(878, 328, 115, 25),
                 text=str(int(STEP_TWO) // 1000) + "W TDP",
                 manager=manager
             )
             MAX_BUTTON = pygame_gui.elements.UIButton(
-                relative_rect=pygame.Rect(878, 410, 100, 25),
+                relative_rect=pygame.Rect(878, 410, 115, 25),
                 text=str(int(MAX_TDP) // 1000) + "W TDP",
                 manager=manager
             )
@@ -113,7 +113,7 @@ def draw_ui():
                 manager=manager
             )
             CLOSE_BUTTON = pygame_gui.elements.UIButton(
-                relative_rect=pygame.Rect(308, 312, 75, 40),
+                relative_rect=pygame.Rect(275, 312, 108, 40),
                 text='Close',
                 manager=manager
             )
