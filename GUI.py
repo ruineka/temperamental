@@ -348,92 +348,92 @@ def draw_ui():
 
         case "Steam Deck":
           MIN_BUTTON = pygame_gui.elements.UIButton(
-                                       relative_rect=pygame.Rect(420,280,100,25),
+                                       relative_rect=pygame.Rect(360,250,550,90),
                                        text=str(int(MIN_TDP) // 1000) + "W TDP",
                                        manager=manager
                                    )
           TIER1_BUTTON = pygame_gui.elements.UIButton(
-                                      relative_rect=pygame.Rect(320,260,100,25),
+                                      relative_rect=pygame.Rect(360,350,550,90),
                                       text=str(int(STEP_ONE) // 1000) + "W TDP",
                                       manager=manager
                                   )
           TIER2_BUTTON = pygame_gui.elements.UIButton(
-                                      relative_rect=pygame.Rect(855,260,100,25),
+                                      relative_rect=pygame.Rect(360,450,550,90),
                                       text=str(int(STEP_TWO) // 1000) + "W TDP",
                                       manager=manager
                                   )
           MAX_BUTTON = pygame_gui.elements.UIButton(
-                                      relative_rect=pygame.Rect(755,280,100,25),
+                                      relative_rect=pygame.Rect(360,550,550,90),
                                       text=str(int(MAX_TDP) // 1000) + "W TDP",
                                       manager=manager
                                   )
           DEFAULT_BUTTON = pygame_gui.elements.UIButton(
-                                      relative_rect=pygame.Rect(475,760,175,40),
+                                      relative_rect=pygame.Rect(350,700,630,125),
                                       text='Restore Defaults',
                                       manager=manager
                                   )
           SMT_BUTTON = pygame_gui.elements.UIButton(
-                                      relative_rect=pygame.Rect(0,770,175,30),
+                                      relative_rect=pygame.Rect(0,270,300,125),
                                       text='Toggle SMT',
                                       manager=manager
                                   )
           BOOST_BUTTON = pygame_gui.elements.UIButton(
-                                      relative_rect=pygame.Rect(0,740,175,30),
+                                      relative_rect=pygame.Rect(0,150,300,125),
                                       text='Toggle CPU Boost',
                                       manager=manager
                                   )
           PERFORMANCE_BUTTON = pygame_gui.elements.UIButton(
-                                      relative_rect=pygame.Rect(0,710,175,30),
+                                      relative_rect=pygame.Rect(0,380,300,125),
                                       text='Toggle Performance Mode',
                                       manager=manager
                                   )
           POWERSAVER_BUTTON = pygame_gui.elements.UIButton(
-                                      relative_rect=pygame.Rect(0,680,175,30),
+                                      relative_rect=pygame.Rect(0,500,300,125),
                                       text='Toggle Power Saver Mode',
                                       manager=manager
                                   )
           CLOSE_BUTTON = pygame_gui.elements.UIButton(
-                                      relative_rect=pygame.Rect(894,340,140,25),
+                                      relative_rect=pygame.Rect(980,150,300,125),
                                       text='Close',
                                       manager=manager
                                   )
           SAVE_BUTTON = pygame_gui.elements.UIButton(
-                                      relative_rect=pygame.Rect(335,760,70,40),
+                                      relative_rect=pygame.Rect(980,700,300,125),
                                       text='Save',
                                       manager=manager
                                   )
           LOAD_BUTTON = pygame_gui.elements.UIButton(
-                                      relative_rect=pygame.Rect(250,760,70,40),
+                                      relative_rect=pygame.Rect(980,150,300,125),
                                       text='Load',
                                       manager=manager
                                   )
           POSITIVE_INCREMENT_BUTTON = pygame_gui.elements.UIButton(
-                                      relative_rect=pygame.Rect(300,417,75,25),
+                                      relative_rect=pygame.Rect(300,150,150,75),
                                       text='+',
                                       manager=manager
                                   )
           NEGATIVE_INCREMENT_BUTTON = pygame_gui.elements.UIButton(
-                                      relative_rect=pygame.Rect(300,382,75,25),
+                                      relative_rect=pygame.Rect(830,150,150,75),
                                       text='-',
                                       manager=manager
                                   )
           APPLY_CHANGES = pygame_gui.elements.UIButton(
-                                      relative_rect=pygame.Rect(900,417,140,25),
+                                      relative_rect=pygame.Rect(0,700,350,125),
                                       text='Apply Changes',
                                       manager=manager
                                   )
           QUIET_FAN = pygame_gui.elements.UIButton(
-                                      relative_rect=pygame.Rect(1100,260,175,40),
+                                      relative_rect=pygame.Rect(1000,275,280,105),
                                       text='Quiet Fan',
                                       manager=manager
                                   )
           BALANCED_FAN = pygame_gui.elements.UIButton(
-                                      relative_rect=pygame.Rect(1100,300,175,40),
+                                      relative_rect=pygame.Rect(1000,375,280,105),
                                       text='Balanced Fan',
                                       manager=manager
                                   )
           PERFORMANCE_FAN = pygame_gui.elements.UIButton(
-                                      relative_rect=pygame.Rect(1100,340,175,40),
+                                      relative_rect=pygame.Rect(1000,475,280,105),
                                       text='Performance Fan',
                                       manager=manager
                                   )
@@ -444,12 +444,12 @@ def draw_ui():
                                       manager=manager
           )
           BOOST_LABEL = pygame_gui.elements.UILabel(
-                                      relative_rect=pygame.Rect(1100,150,150,50),
+                                      relative_rect=pygame.Rect(850,100,150,50),
                                       text=BOOST,
                                       manager=manager
           )
           SMT_LABEL = pygame_gui.elements.UILabel(
-                                      relative_rect=pygame.Rect(1100,200,150,50),
+                                      relative_rect=pygame.Rect(1050,100,150,50),
                                       text=SMT,
                                       manager=manager
           )
@@ -478,11 +478,7 @@ def draw_ui():
                                       html_text="System Name: " + system_name + "\n" +"CPU Name: " + subprocess.check_output("lscpu | grep \"Model name\" | cut -d : -f 2 | xargs", shell=True, universal_newlines=True).strip(),
                                       manager=manager
           )
-          IMAGE_1 = pygame_gui.elements.UIImage(
-                                      relative_rect=pygame.Rect(375,250,525,325),
-                                      image_surface= pygame.image.load('assets/images/sd-ctr.png').convert_alpha(),
-                                      manager=manager
-          )
+          
 
         case "DEFAULT":
             MIN_BUTTON = pygame_gui.elements.UIButton(
