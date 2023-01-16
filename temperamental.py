@@ -295,7 +295,7 @@ def get_axis(event, controller_type):
        subprocess.run(RYZENADJ + ' ' + PARAMS, shell=True)
        GUI.POWER_PROFILE_LABEL.set_text("Power Profile: Performance")
        
-    if pygame.joystick.Joystick(event.instance_id) and controller_type == "Xbox Series X" and pygame.JOYAXISMOTION and event.axis == 4:
+    if pygame.joystick.Joystick(event.instance_id) and controller_type == "Xbox Series X" and pygame.JOYAXISMOTION and event.axis == 2:
        PARAMS = POWER_SAVER
        subprocess.run(RYZENADJ + ' ' + PARAMS, shell=True)
        GUI.POWER_PROFILE_LABEL.set_text("Power Profile: Power Saver")
@@ -455,8 +455,8 @@ def __main__():
 
             # if event.type == pygame.JOYBUTTONUP:
             #   gamepad_button_events(event)
-
-            if event.type == pygame.JOYAXISMOTION and event.axis == 5 and event.value == 1 or event.type == pygame.JOYAXISMOTION and event.axis == 4 and event.value == 1:
+            
+            if event.type == pygame.JOYAXISMOTION and event.axis == 5 and event.value == 1 or event.type == pygame.JOYAXISMOTION and event.axis == 2 and event.value == 1:
                set_gamepad_button(event)
             if event.type == pygame.JOYHATMOTION:
                #get_axis(event)
