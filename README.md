@@ -18,7 +18,22 @@ AYA NEO
 INTEL ONEXPLAYER
 
 # Usage
-This tool is currently under experimental development so there is no usable function as of yet.
+ChimeraOS install and testing
 
-![Screenshot from 2023-01-12 20-49-12](https://user-images.githubusercontent.com/16360335/212226323-7da4945c-b5cb-4a97-b204-3bbb4285c6ee.png)
+# Switch to TTY 3 CTRL+ALT+F3
+```shell
+sudo frzr-unlock
+sudo pacman -Sy pip git
+pip install pygame pygame_gui
+git clone https://github.com/ruineka/temperamental
+cd temperamental
+sudo ./install.sh
+./gamepad-listener.py
+```
+
+#Switch to TTY 7 CTRL+ALT+F7
+
+Press L3 and R3 to start temperamental in gamemode
+
+![Screenshot from 2023-01-15 10-54-53](https://user-images.githubusercontent.com/16360335/212610590-fed6b9f7-dcab-4e30-92bd-7507cdebe758.png)
 
