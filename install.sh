@@ -11,7 +11,7 @@ mkdir -p /usr/lib/temperamental
 cp -r $PWD/usr/lib/temperamental/* /usr/lib/temperamental/
 cp -r $PWD/usr/lib/temperamental/profiles /usr/share/temperamental/
 cp -r $PWD/usr/lib/temperamental/temperamental-polkit-helpers/ /usr/bin/
-cp $PWD/usr/lib/temperamental/org.ruineka.temperamental.policy /usr/share/polkit-1/actions/
+cp $PWD/org.ruineka.temperamental.policy /usr/share/polkit-1/actions/
 
 
 # Set up the sudo permissions
@@ -26,6 +26,6 @@ EOF
 
 # Set up temperamental service
 cp $PWD/temperamental.service /usr/lib/systemd/system/
-systemctl enable --user $USER temperamental && systemctl --user start $USER temperamental
+systemctl enable temperamental && systemctl start temperamental
 echo "Installed Successfully"
 
