@@ -7,6 +7,7 @@ import os.path
 import subprocess
 import sys
 import GUI
+import time
 from os import path
 from devices import MIN_TDP, STEP_ONE, STEP_TWO, MAX_TDP, QUIET_FAN_CONFIG, BALANCED_FAN_CONFIG, PERF_FAN_CONFIG
 
@@ -26,6 +27,20 @@ TCTL_TEMP="--tctl-temp"
 TEMP_LIMIT="90"
 TARGET_TDP=MIN_TDP
 
+# Default values based on Xbox Series X Controller
+BUTTON_A=0
+BUTTON_B=1
+BUTTON_X=2
+BUTTON_Y=3
+BUTTON_LB=6
+BUTTON_RB=7
+BUTTON_LT=4 #Axis
+BUTTON_RT=5 #Axis
+BUTTON_L3=13
+BUTTON_R3=14
+BUTTON_START=11
+BUTTON_SELECT=10
+
 # Grab current values before changes
 DEFAULT_SMT = subprocess.getoutput('cat /sys/devices/system/cpu/smt/control')
 DEFAULT_BOOST = subprocess.getoutput(
@@ -36,7 +51,43 @@ subprocess.run(RYZENADJ + ' ' + '-i', shell=True)
 def get_profile():
     print("Grab profiles")
 
+def set_gamepad_button(event):
+    global controller_list
+    global controller_type
+    global gamepad
+
+    CONTROLLERS = {}
+    i = 0
+    while i < len(controller_list):
+       CONTROLLERS[i] = (f"{pygame.joystick.Joystick(i).get_name()}")
+       i = i + 1
+       
+    match CONTROLLERS[event.instance_id]:
     
+      case "Xbox Series X Controller":
+          controller_type = "Xbox Series X"
+          controller_id = CONTROLLERS[event.instance_id]
+          gamepad = pygame.joystick.Joystick(event.instance_id)
+
+      case "Wireless Controller":
+          controller_type = "PS5"
+          controller_id = CONTROLLERS[event.instance_id]
+          gamepad = pygame.joystick.Joystick(event.instance_id)
+      case "Xbox 360 Controller":
+          controller_type = "Xbox 360"
+          controller_id = CONTROLLERS[events.instance_id]
+          gamepad = pygame.joystick.Joystick(event.instance_id)
+    try:
+       if pygame.JOYAXISMOTION:
+          get_axis(event, controller_type)
+    except:
+       print("Button wasn't an axis")
+    try:
+       if pygame.JOYHATMOTION:
+          get_hat(event)
+    except:
+       print("Button wasn't a button")
+       
 def set_tdp_values(button_number):
     global TARGET_TDP
     match button_number:
@@ -100,62 +151,109 @@ def update_hud():
 
 def gamepad_button_events(event):
 
-    print("running gamepad events")
-    print(event)
+    global controller_type
+    
+    match controller_type:
+       case "Xbox Series X":
+
+          if event.button == 4:
+             button_number = 2
+             set_tdp_values(button_number)
+          if event.button == 6:
+             if subprocess.getoutput('cat /sys/devices/system/cpu/cpufreq/boost') == '1':
+                GUI.BOOST = '0'
+             else:
+                GUI.BOOST = '1'
+             subprocess.run('/usr/bin/echo ' + GUI.BOOST +
+                           ' | sudo tee /sys/devices/system/cpu/cpufreq/boost', shell=True)
+          if event.button == 7:
+
+             if subprocess.getoutput('cat /sys/devices/system/cpu/smt/control') == 'on':
+                GUI.SMT = 'off'
+             else:
+                GUI.SMT = 'on'
+             subprocess.run('/usr/bin/echo ' + GUI.SMT +
+                           ' | sudo tee /sys/devices/system/cpu/smt/control', shell=True)
+          if event.button == 10:
+             sys.exit(0)
+          if event.button == 11:
+             print(RYZENADJ + ' ' + STAPM_LIMIT + "=" + TARGET_TDP + " " + FAST_LIMIT + "=" +
+             TARGET_TDP + " " + SLOW_LIMIT + "=" + TARGET_TDP + " " + TCTL_TEMP + "=" + TEMP_LIMIT)
+             subprocess.run(RYZENADJ + ' ' + STAPM_LIMIT + "=" + TARGET_TDP + " " + FAST_LIMIT + "=" +
+                            TARGET_TDP + " " + SLOW_LIMIT + "=" + TARGET_TDP + " " + TCTL_TEMP + "=" + TEMP_LIMIT, shell=True)
+       case "Xbox 360":
+          print("Xbox 360 controller detected, not yet implemented though")
+       case "PS5":
+
+          if event.button == 4:
+             if subprocess.getoutput('cat /sys/devices/system/cpu/cpufreq/boost') == '1':
+                GUI.BOOST = '0'
+             else:
+                GUI.BOOST = '1'
+             subprocess.run('/usr/bin/echo ' + GUI.BOOST +
+                           ' | sudo tee /sys/devices/system/cpu/cpufreq/boost', shell=True)
+          if event.button == 6:
+             PARAMS = MAX_PERFORMANCE
+             subprocess.run(RYZENADJ + ' ' + PARAMS, shell=True)
+             GUI.POWER_PROFILE_LABEL.set_text("Power Profile: Performance")
+          if event.button == 7:
+             PARAMS = POWER_SAVER
+             subprocess.run(RYZENADJ + ' ' + PARAMS, shell=True)
+             GUI.POWER_PROFILE_LABEL.set_text("Power Profile: Power Saver")
+          if event.button == 5:
+             if subprocess.getoutput('cat /sys/devices/system/cpu/smt/control') == 'on':
+                GUI.SMT = 'off'
+             else:
+                GUI.SMT = 'on'
+             subprocess.run('/usr/bin/echo ' + GUI.SMT +
+                            ' | sudo tee /sys/devices/system/cpu/smt/control', shell=True)
+          if event.button == 8:
+             sys.exit(0)
+          if event.button == 9:
+             print(RYZENADJ + ' ' + STAPM_LIMIT + "=" + TARGET_TDP + " " + FAST_LIMIT + "=" +
+                   TARGET_TDP + " " + SLOW_LIMIT + "=" + TARGET_TDP + " " + TCTL_TEMP + "=" + TEMP_LIMIT)
+             subprocess.run(RYZENADJ + ' ' + STAPM_LIMIT + "=" + TARGET_TDP + " " + FAST_LIMIT + "=" +
+                            TARGET_TDP + " " + SLOW_LIMIT + "=" + TARGET_TDP + " " + TCTL_TEMP + "=" + TEMP_LIMIT, shell=True)
+          if event.button == 2:
+             button_number = 2
+             set_tdp_values(button_number)
+             
     if event.button == 0:
         button_number = 0
         set_tdp_values(button_number)
     if event.button == 1:
         button_number = 1
         set_tdp_values(button_number)
-    if event.button == 2:
-        button_number = 2
-        set_tdp_values(button_number)
+
     if event.button == 3:
         button_number = 3
         set_tdp_values(button_number)
-    if event.button == 4:
-        if subprocess.getoutput('cat /sys/devices/system/cpu/cpufreq/boost') == '1':
-            GUI.BOOST = '0'
-        else:
-            GUI.BOOST = '1'
-        subprocess.run('/usr/bin/echo ' + GUI.BOOST +
-                       ' | sudo tee /sys/devices/system/cpu/cpufreq/boost', shell=True)
-    if event.button == 5:
-        if subprocess.getoutput('cat /sys/devices/system/cpu/smt/control') == 'on':
-            GUI.SMT = 'off'
-        else:
-            GUI.SMT = 'on'
-        subprocess.run('/usr/bin/echo ' + GUI.SMT +
-                       ' | sudo tee /sys/devices/system/cpu/smt/control', shell=True)
-    if event.button == 6:
-        PARAMS = MAX_PERFORMANCE
-        subprocess.run(RYZENADJ + ' ' + PARAMS, shell=True)
-        GUI.POWER_PROFILE_LABEL.set_text("Power Profile: Performance")
-    if event.button == 7:
-        PARAMS = POWER_SAVER
-        subprocess.run(RYZENADJ + ' ' + PARAMS, shell=True)
-        GUI.POWER_PROFILE_LABEL.set_text("Power Profile: Power Saver")
-        
-    if event.button == 8:
-       sys.exit(0)
-    if event.button == 9:
-       print(RYZENADJ + ' ' + STAPM_LIMIT + "=" + TARGET_TDP + " " + FAST_LIMIT + "=" +
-             TARGET_TDP + " " + SLOW_LIMIT + "=" + TARGET_TDP + " " + TCTL_TEMP + "=" + TEMP_LIMIT)
-       subprocess.run(RYZENADJ + ' ' + STAPM_LIMIT + "=" + TARGET_TDP + " " + FAST_LIMIT + "=" +
-                      TARGET_TDP + " " + SLOW_LIMIT + "=" + TARGET_TDP + " " + TCTL_TEMP + "=" + TEMP_LIMIT, shell=True)
 
+def get_axis(event, controller_type):
 
-def get_axis(event):
+    if pygame.joystick.Joystick(event.instance_id) and controller_type == "Xbox Series X" and pygame.JOYAXISMOTION and event.axis == 5:
+       PARAMS = MAX_PERFORMANCE
+       subprocess.run(RYZENADJ + ' ' + PARAMS, shell=True)
+       GUI.POWER_PROFILE_LABEL.set_text("Power Profile: Performance")
+       
+    if pygame.joystick.Joystick(event.instance_id) and controller_type == "Xbox Series X" and pygame.JOYAXISMOTION and event.axis == 4:
+       PARAMS = POWER_SAVER
+       subprocess.run(RYZENADJ + ' ' + PARAMS, shell=True)
+       GUI.POWER_PROFILE_LABEL.set_text("Power Profile: Power Saver")
+       
+def get_hat(event):
+    global TARGET_TDP
     hats = gamepad.get_numhats()
 
-    #for i in range(hats):
-    #    hat = gamepad.get_hat(i)
+    for i in range(hats):
+        hat = gamepad.get_hat(i)
 
-    #if gamepad.get_hat(i) == (1, 0):
-    #    GUI.currentTDP = GUI.currentTDP + 1
-    #if gamepad.get_hat(i) == (-1, 0):
-    #    GUI.currentTDP = GUI.currentTDP - 1
+    if gamepad.get_hat(i) == (1, 0):
+        TARGET_TDP = str(int(TARGET_TDP) + 1000)
+        GUI.currentTDP = str(int(TARGET_TDP) // 1000)
+    if gamepad.get_hat(i) == (-1, 0):
+        TARGET_TDP = str(int(TARGET_TDP) - 1000)
+        GUI.currentTDP = str(int(TARGET_TDP) // 1000)
 
 def keyboard_mouse_events(event):
 
@@ -244,10 +342,13 @@ def keyboard_mouse_events(event):
 def __main__():
 
     global gamepad
+    global controller_list
 
     joysticks = {}
+    controller_list = {}
     pygame.init()
     isRunning = True
+    button_on = False
 
     while isRunning:
 
@@ -255,6 +356,7 @@ def __main__():
         GUI.window_surface.blit(GUI.background, (0, 0))
         GUI.window_surface.fill((0, 10, 25))
         check_depends()
+        
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -266,15 +368,17 @@ def __main__():
                     keyboard_mouse_events(event)
 
             if event.type == pygame.JOYBUTTONDOWN:
-                print(event)
+                set_gamepad_button(event)
                 gamepad_button_events(event)
 
               # Handle hotplugging
             if event.type == pygame.JOYDEVICEADDED:
-
                 gamepad = pygame.joystick.Joystick(event.device_index)
                 joysticks[gamepad.get_instance_id()] = gamepad
-                print(f"Joystick {gamepad.get_instance_id()} connencted")
+                controller_list[gamepad.get_instance_id()] = gamepad
+                print(f"{gamepad.get_name()} {gamepad.get_instance_id()} connected")
+                
+               
 
             if event.type == pygame.JOYDEVICEREMOVED:
                 del joysticks[event.instance_id]
@@ -283,10 +387,14 @@ def __main__():
             # if event.type == pygame.JOYBUTTONUP:
             #   gamepad_button_events(event)
 
-            if event.type == pygame.JOYAXISMOTION:
-                get_axis(event)
+            if event.type == pygame.JOYAXISMOTION and event.axis == 5 and event.value == 1 or event.type == pygame.JOYAXISMOTION and event.axis == 4 and event.value == 1:
+               set_gamepad_button(event)
+            if event.type == pygame.JOYHATMOTION:
+               #get_axis(event)
+               set_gamepad_button(event)
+                
             GUI.manager.process_events(event)
-
+            
         update_hud()
         GUI.manager.update(time_delta)
         GUI.manager.draw_ui(GUI.window_surface)
