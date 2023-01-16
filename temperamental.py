@@ -227,9 +227,9 @@ def gamepad_button_events(event):
              subprocess.run('/usr/bin/echo ' + GUI.SMT +
                             ' | sudo tee /sys/devices/system/cpu/smt/control', shell=True)
 
-          if event.button == 7:
-             sys.exit(0)
           if event.button == 6:
+             sys.exit(0)
+          if event.button == 7:
              print(RYZENADJ + ' ' + STAPM_LIMIT + "=" + TARGET_TDP + " " + FAST_LIMIT + "=" +
                    TARGET_TDP + " " + SLOW_LIMIT + "=" + TARGET_TDP + " " + TCTL_TEMP + "=" + TEMP_LIMIT)
              subprocess.run(RYZENADJ + ' ' + STAPM_LIMIT + "=" + TARGET_TDP + " " + FAST_LIMIT + "=" +
