@@ -9,7 +9,7 @@ if system_id in (
         "ONEXPLAYER Mini Pro",
         "AOKZOE A1 AR07"
         ):
-        SYSTEM_NAME = system_id
+        SYSTEM_NAME = "ONE XPLAYER"
         MIN_TDP='5000'
         STEP_ONE='10000'
         STEP_TWO='15000'
