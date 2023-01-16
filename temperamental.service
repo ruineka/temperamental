@@ -5,7 +5,7 @@ After=handycon.service
 [Service]
 User=gamer
 Group=gamer
-ExecStart=/usr/lib/temperamental/gamepad-listener.sh
+ExecStart=/usr/lib/temperamental/gamepad-listener.py
 
 [Install]
 WantedBy=multi-user.target
