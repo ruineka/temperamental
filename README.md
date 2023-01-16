@@ -23,7 +23,7 @@ ChimeraOS install and testing
 # Switch to TTY 3 CTRL+ALT+F3
 ```shell
 sudo frzr-unlock
-sudo pacman -Sy pip git
+sudo pacman -Sy python-pip git
 pip install pygame pygame_gui
 git clone https://github.com/ruineka/temperamental
 cd temperamental
