@@ -14,6 +14,7 @@ controller_names = (
         'OneXPlayer Gamepad',
         'Sony Interactive Entertainment Wireless Controller',
         'Handheld Controller',
+        'Microsoft Controller',
         )
 global gamepad
 # Identify system input event devices.
@@ -29,7 +30,7 @@ async def print_events(device):
         if event.type == 1 and active != []:
            print("Currently pressed button IDs")
            print(active)
-        if active == [317, 318] and event.type == 1 and active != []:
+        if active == [314, 315] and event.type == 1 and active != []:
            subprocess.run("/usr/lib/temperamental/./inject-gamescope.sh")
 
 

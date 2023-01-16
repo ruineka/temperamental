@@ -62,6 +62,15 @@ elif system_id == "AOKZOE A1 AR07":
    QUIET_FAN_CONFIG="/usr/share/temperamental/profiles/AOKZOE-MINIPRO-QUIET.yaml"
    BALANCED_FAN_CONFIG="/usr/share/temperamental/profiles/AOKZOE-MINIPRO-BALANCED.yaml"
    PERF_FAN_CONFIG="/usr/share/temperamental/profiles/AOKZOE-MINIPRO-PERF.yaml"
+elif system_id == "VCS 800 Onyx":
+   SYSTEM_NAME = system_id
+   MIN_TDP="5000"
+   STEP_ONE="10000"
+   STEP_TWO='25000'
+   MAX_TDP='54000'
+   QUIET_FAN_CONFIG=""
+   BALANCED_FAN_CONFIG=""
+   PERF_FAN_CONFIG=""
 else:
    print(system_id + " " + "is not currently compatible, if you know the limitations of your hardware you can add support on your own")
    sys.exit(-1)
