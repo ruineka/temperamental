@@ -55,7 +55,7 @@ def set_gamepad_button(event):
     global controller_list
     global controller_type
     global gamepad
-
+    controller_type = ""
     CONTROLLERS = {}
     i = 0
     while i < len(controller_list):
