@@ -32,9 +32,18 @@ elif system_id == "ONE XPLAYER":
    STEP_ONE="10000"
    STEP_TWO='15000'
    MAX_TDP='25000'
-   QUIET_FAN_CONFIG="/usr/share/temperamental/profiles/AOKZOE-MINIPRO-QUIET.yaml"
-   BALANCED_FAN_CONFIG="/usr/share/temperamental/profiles/AOKZOE-MINIPRO-BALANCED.yaml"
-   PERF_FAN_CONFIG="/usr/share/temperamental/profiles/AOKZOE-MINIPRO-PERF.yaml"
+   QUIET_FAN_CONFIG=""
+   BALANCED_FAN_CONFIG=""
+   PERF_FAN_CONFIG=""
+elif system_id == "ONEXPLAYER mini A07":
+   SYSTEM_NAME = system_id
+   MIN_TDP="5000"
+   STEP_ONE="10000"
+   STEP_TWO='15000'
+   MAX_TDP='25000'
+   QUIET_FAN_CONFIG=""
+   BALANCED_FAN_CONFIG=""
+   PERF_FAN_CONFIG=""
 elif system_id == "Jupiter":
    SYSTEM_NAME = system_id
    MIN_TDP="5000"
