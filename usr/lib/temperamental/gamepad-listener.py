@@ -30,7 +30,7 @@ async def print_events(device):
            print("Currently pressed button IDs")
            print(active)
         if active == [317, 318] and event.type == 1 and active != []:
-           subprocess.run("./inject-gamescope.sh")
+           subprocess.run("/usr/lib/temperamental/./inject-gamescope.sh")
 
 
 for device in devices_original:
