@@ -2,7 +2,12 @@
 
 import asyncio, evdev
 import subprocess
+import time
 from evdev import InputDevice, InputEvent, categorize, UInput, ecodes as e, list_devices, ff
+
+## Wait for a bit to let services start
+time.sleep(5)
+
 controller_names = (
         'Microsoft X-Box 360 pad',
         'Generic X-Box pad',

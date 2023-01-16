@@ -1,4 +1,4 @@
 #!/bin/bash
 
 # Run as Steam Deck
-./temperamental.py "ONE XPLAYER"
+$PWD/usr/lib/temperamental/./temperamental.py "ONE XPLAYER"

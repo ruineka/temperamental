@@ -7,9 +7,11 @@ fi
 
 mkdir -p /usr/share/temperamental/profiles
 mkdir -p /usr/bin/temperamental-polkit-helpers/
-cp -r profiles /usr/share/temperamental/
-cp -r temperamental-polkit-helpers/ /usr/bin/
-cp org.ruineka.temperamental.policy /usr/share/polkit-1/actions/
+mkdir -p /usr/lib/temperamental
+cp -r $PWD/usr/lib/temperamental/* /usr/lib/temperamental/
+cp -r $PWD/usr/lib/temperamental/profiles /usr/share/temperamental/
+cp -r $PWD/usr/lib/temperamental/temperamental-polkit-helpers/ /usr/bin/
+cp $PWD/usr/lib/temperamental/org.ruineka.temperamental.policy /usr/share/polkit-1/actions/
 
 
 # Set up the sudo permissions
@@ -22,5 +24,8 @@ ${SUDO_USER} ALL=(ALL) NOPASSWD: /usr/bin/tee /sys/devices/system/cpu/cpufreq/bo
 ${SUDO_USER} ALL=(ALL) NOPASSWD: /usr/bin/tee /sys/devices/system/cpu/smt/control*
 EOF
 
+# Set up temperamental service
+cp $PWD/temperamental.service /usr/lib/systemd/system/
+systemctl enable --user $USER temperamental && systemctl --user start $USER temperamental
 echo "Installed Successfully"
 

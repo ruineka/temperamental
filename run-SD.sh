@@ -1,4 +1,4 @@
 #!/bin/bash
 
 # Run as Steam Deck
-./temperamental.py "Steam Deck"
+$PWD/usr/lib/temperamental/./temperamental.py "Steam Deck"

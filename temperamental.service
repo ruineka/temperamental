@@ -1,0 +1,11 @@
+[Unit]
+Description=Temperamental TDP Control
+After=handycon.service
+
+[Service]
+User=gamer
+Group=gamer
+ExecStart=/usr/lib/temperamental/gamepad-listener.sh
+
+[Install]
+WantedBy=multi-user.target

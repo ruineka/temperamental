@@ -36,7 +36,7 @@ elif system_id == "ONE XPLAYER":
    BALANCED_FAN_CONFIG=""
    PERF_FAN_CONFIG=""
 elif system_id == "ONEXPLAYER mini A07":
-   SYSTEM_NAME = system_id
+   SYSTEM_NAME = "ONE XPLAYER"
    MIN_TDP="5000"
    STEP_ONE="10000"
    STEP_TWO='15000'

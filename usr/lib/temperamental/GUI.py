@@ -21,7 +21,7 @@ pygame.init()
 pygame.display.set_caption('Temperamental TDP Control')
 window_surface = pygame.display.set_mode((1280, 800))
 background = pygame.Surface((1280, 800))
-img = pygame.image.load('assets/images/icon.png')
+img = pygame.image.load('usr/lib/temperamental/assets/images/icon.png')
 pygame.display.set_icon(img)
 
 manager = pygame_gui.UIManager((1280, 800))
@@ -202,7 +202,7 @@ def draw_ui():
             IMAGE_1 = pygame_gui.elements.UIImage(
                 relative_rect=pygame.Rect(375, 250, 525, 325),
                 image_surface=pygame.image.load(
-                    'assets/images/oxp-ctr.png').convert_alpha(),
+                    'usr/lib/temperamental/assets/images/oxp-ctr.png').convert_alpha(),
                 manager=manager
             )
 
@@ -342,7 +342,7 @@ def draw_ui():
             IMAGE_1 = pygame_gui.elements.UIImage(
                 relative_rect=pygame.Rect(375, 250, 525, 325),
                 image_surface=pygame.image.load(
-                    'assets/images/aya-neo-ctr.png').convert_alpha(),
+                    'usr/lib/temperamental/assets/images/aya-neo-ctr.png').convert_alpha(),
                 manager=manager
             )
 
@@ -480,7 +480,7 @@ def draw_ui():
           )
           IMAGE_1 = pygame_gui.elements.UIImage(
                                       relative_rect=pygame.Rect(375,250,525,325),
-                                      image_surface= pygame.image.load('assets/images/sd-ctr.png').convert_alpha(),
+                                      image_surface= pygame.image.load('usr/lib/temperamental/assets/images/sd-ctr.png').convert_alpha(),
                                       manager=manager
           )
 
@@ -620,7 +620,7 @@ def draw_ui():
             IMAGE_1 = pygame_gui.elements.UIImage(
                 relative_rect=pygame.Rect(375, 250, 525, 325),
                 image_surface=pygame.image.load(
-                    'assets/images/xbox-ctr.png').convert_alpha(),
+                    'usr/lib/temperamental/assets/images/xbox-ctr.png').convert_alpha(),
                 manager=manager
             )
 
@@ -761,7 +761,7 @@ def draw_ui():
             IMAGE_1 = pygame_gui.elements.UIImage(
                 relative_rect=pygame.Rect(375, 250, 525, 325),
                 image_surface=pygame.image.load(
-                    'assets/images/xbox-ctr.png').convert_alpha(),
+                    'usr/lib/temperamental/assets/images/xbox-ctr.png').convert_alpha(),
                 manager=manager
             )
             
@@ -899,6 +899,6 @@ def draw_ui():
           )
           IMAGE_1 = pygame_gui.elements.UIImage(
                                       relative_rect=pygame.Rect(375,250,525,325),
-                                      image_surface= pygame.image.load('assets/images/xbox-ctr.png').convert_alpha(),
+                                      image_surface= pygame.image.load('usr/lib/temperamental/assets/images/xbox-ctr.png').convert_alpha(),
                                       manager=manager
           )
