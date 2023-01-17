@@ -906,77 +906,77 @@ def draw_ui():
 
         case "DEFAULT":
             MIN_BUTTON = pygame_gui.elements.UIButton(
-                relative_rect=pygame.Rect(340, 250, 100, 25),
+                relative_rect=pygame.Rect(878, 415, 150, 35),
                 text=str(int(MIN_TDP) // 1000) + "W TDP",
                 manager=manager
             )
             TIER1_BUTTON = pygame_gui.elements.UIButton(
-                relative_rect=pygame.Rect(320, 280, 100, 25),
+                relative_rect=pygame.Rect(878, 370, 135, 35),
                 text=str(int(STEP_ONE) // 1000) + "W TDP",
                 manager=manager
             )
             TIER2_BUTTON = pygame_gui.elements.UIButton(
-                relative_rect=pygame.Rect(835, 250, 100, 25),
+                relative_rect=pygame.Rect(878, 328, 115, 35),
                 text=str(int(STEP_TWO) // 1000) + "W TDP",
                 manager=manager
             )
             MAX_BUTTON = pygame_gui.elements.UIButton(
-                relative_rect=pygame.Rect(855, 280, 100, 25),
+                relative_rect=pygame.Rect(878, 460, 115, 35),
                 text=str(int(MAX_TDP) // 1000) + "W TDP",
                 manager=manager
             )
             DEFAULT_BUTTON = pygame_gui.elements.UIButton(
-                relative_rect=pygame.Rect(475, 760, 175, 40),
+                relative_rect=pygame.Rect(550, 508, 175, 50),
                 text='Restore Defaults',
                 manager=manager
             )
             SMT_BUTTON = pygame_gui.elements.UIButton(
-                relative_rect=pygame.Rect(0, 770, 175, 30),
+                relative_rect=pygame.Rect(850, 290, 175, 30),
                 text='Toggle SMT',
                 manager=manager
             )
             BOOST_BUTTON = pygame_gui.elements.UIButton(
-                relative_rect=pygame.Rect(0, 740, 175, 30),
+                relative_rect=pygame.Rect(247, 275, 180, 30),
                 text='Toggle CPU Boost',
                 manager=manager
             )
             PERFORMANCE_BUTTON = pygame_gui.elements.UIButton(
-                relative_rect=pygame.Rect(0, 710, 175, 30),
+                relative_rect=pygame.Rect(247, 245, 225, 30),
                 text='Toggle Performance Mode',
                 manager=manager
             )
             POWERSAVER_BUTTON = pygame_gui.elements.UIButton(
-                relative_rect=pygame.Rect(0, 680, 175, 30),
+                relative_rect=pygame.Rect(800, 245, 225, 30),
                 text='Toggle Power Saver Mode',
                 manager=manager
             )
             CLOSE_BUTTON = pygame_gui.elements.UIButton(
-                relative_rect=pygame.Rect(860, 355, 70, 25),
+                relative_rect=pygame.Rect(308, 335, 90, 40),
                 text='Close',
                 manager=manager
             )
             SAVE_BUTTON = pygame_gui.elements.UIButton(
-                relative_rect=pygame.Rect(335, 760, 70, 40),
+                relative_rect=pygame.Rect(878, 500, 150, 40),
                 text='Save',
                 manager=manager
             )
             LOAD_BUTTON = pygame_gui.elements.UIButton(
-                relative_rect=pygame.Rect(250, 760, 70, 40),
+                relative_rect=pygame.Rect(308, 375, 90, 40),
                 text='Load',
                 manager=manager
             )
             POSITIVE_INCREMENT_BUTTON = pygame_gui.elements.UIButton(
-                relative_rect=pygame.Rect(325, 495, 75, 25),
+                relative_rect=pygame.Rect(325, 462, 75, 25),
                 text='+',
                 manager=manager
             )
             NEGATIVE_INCREMENT_BUTTON = pygame_gui.elements.UIButton(
-                relative_rect=pygame.Rect(335, 390, 75, 25),
+                relative_rect=pygame.Rect(325, 434, 75, 25),
                 text='-',
                 manager=manager
             )
             APPLY_CHANGES = pygame_gui.elements.UIButton(
-                relative_rect=pygame.Rect(865, 420, 150, 25),
+                relative_rect=pygame.Rect(247, 305, 150, 25),
                 text='Apply Changes',
                 manager=manager
             )
@@ -1002,12 +1002,12 @@ def draw_ui():
                 manager=manager
             )
             BOOST_LABEL = pygame_gui.elements.UILabel(
-                relative_rect=pygame.Rect(1100, 150, 150, 50),
+                relative_rect=pygame.Rect(850, 100, 150, 50),
                 text=BOOST,
                 manager=manager
             )
             SMT_LABEL = pygame_gui.elements.UILabel(
-                relative_rect=pygame.Rect(1100, 200, 150, 50),
+                relative_rect=pygame.Rect(1050, 100, 150, 50),
                 text=SMT,
                 manager=manager
             )
