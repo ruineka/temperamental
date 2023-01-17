@@ -73,7 +73,7 @@ elif system_id in (
         "AYANEO 2021 Pro",
         "AYANEO 2021 Pro Retro Power",
 ):
-    SYSTEM_NAME = "AYA NEO NEXT"
+    SYSTEM_NAME = "AYA NEO"
     MIN_TDP = '5000'
     STEP_ONE = '10000'
     STEP_TWO = '15000'
