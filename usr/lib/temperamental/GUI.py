@@ -941,12 +941,12 @@ def draw_ui():
                 manager=manager
             )
             PERFORMANCE_BUTTON = pygame_gui.elements.UIButton(
-                relative_rect=pygame.Rect(247, 245, 225, 30),
+                relative_rect=pygame.Rect(247, 241, 225, 30),
                 text='Toggle Performance Mode',
                 manager=manager
             )
             POWERSAVER_BUTTON = pygame_gui.elements.UIButton(
-                relative_rect=pygame.Rect(800, 245, 225, 30),
+                relative_rect=pygame.Rect(800, 241, 225, 30),
                 text='Toggle Power Saver Mode',
                 manager=manager
             )
