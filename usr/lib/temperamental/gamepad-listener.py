@@ -2,7 +2,12 @@
 
 import asyncio, evdev
 import subprocess
+import time
 from evdev import InputDevice, InputEvent, categorize, UInput, ecodes as e, list_devices, ff
+
+## Wait for a bit to let services start
+time.sleep(5)
+
 controller_names = (
         'Microsoft X-Box 360 pad',
         'Generic X-Box pad',
@@ -25,7 +30,7 @@ async def print_events(device):
            print("Currently pressed button IDs")
            print(active)
         if active == [317, 318] and event.type == 1 and active != []:
-           subprocess.run("./inject-gamescope.sh")
+           subprocess.run("/usr/lib/temperamental/./inject-gamescope.sh")
 
 
 for device in devices_original:

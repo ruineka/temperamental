@@ -1,4 +1,4 @@
 #!/bin/bash
 
 # Run as Steam Deck
-./temperamental.py "AYA NEO"
+$PWD/usr/lib/temperamental/./temperamental.py "AYA NEO"
