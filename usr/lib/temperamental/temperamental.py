@@ -74,6 +74,10 @@ def set_gamepad_button(event):
             controller_type = "PS5"
             controller_id = CONTROLLERS[event.instance_id]
             gamepad = pygame.joystick.Joystick(event.instance_id)
+        case "Sony Interactive Entertainment Wireless Controller":
+            controller_type = "PS5"
+            controller_id = CONTROLLERS[event.instance_id]
+            gamepad = pygame.joystick.Joystick(event.instance_id)
         case "Xbox 360 Controller":
             controller_type = "Xbox 360"
             controller_id = CONTROLLERS[event.instance_id]
@@ -206,11 +210,11 @@ def gamepad_button_events(event):
                 button_number = 1
                 set_tdp_values(button_number)
 
-            if event.button == 2:
+            if event.button == 3:
                 button_number = 2
                 set_tdp_values(button_number)
 
-            if event.button == 3:
+            if event.button == 2:
                 button_number = 3
                 set_tdp_values(button_number)
 
