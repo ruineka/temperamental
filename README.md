@@ -28,7 +28,7 @@ pip install pygame pygame_gui
 git clone https://github.com/ruineka/temperamental
 cd temperamental
 sudo ./install.sh
-./gamepad-listener.py
+reboot
 ```
 
 #Switch to TTY 7 CTRL+ALT+F7
