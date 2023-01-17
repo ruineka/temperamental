@@ -53,6 +53,33 @@ elif system_id == "Jupiter":
    QUIET_FAN_CONFIG=""
    BALANCED_FAN_CONFIG=""
    PERF_FAN_CONFIG=""
+elif system_id == "AIR":
+   SYSTEM_NAME = "AYA NEO"
+   MIN_TDP="5000"
+   STEP_ONE="10000"
+   STEP_TWO='12000'
+   MAX_TDP='15000'
+   QUIET_FAN_CONFIG=""
+   BALANCED_FAN_CONFIG=""
+   PERF_FAN_CONFIG=""
+elif system_id == "AIR PRO":
+   SYSTEM_NAME = "AYA NEO"
+   MIN_TDP="5000"
+   STEP_ONE="10000"
+   STEP_TWO='12000'
+   MAX_TDP='18000'
+   QUIET_FAN_CONFIG=""
+   BALANCED_FAN_CONFIG=""
+   PERF_FAN_CONFIG=""
+elif system_id == "AYANEO NEXT":
+   SYSTEM_NAME = "AYA NEO"
+   MIN_TDP="5000"
+   STEP_ONE="10000"
+   STEP_TWO='12000'
+   MAX_TDP='28000'
+   QUIET_FAN_CONFIG=""
+   BALANCED_FAN_CONFIG=""
+   PERF_FAN_CONFIG=""
 elif system_id == "AOKZOE A1 AR07":
    SYSTEM_NAME = system_id
    MIN_TDP="5000"
