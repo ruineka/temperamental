@@ -306,12 +306,12 @@ def get_axis(event, controller_type):
         subprocess.run(RYZENADJ + ' ' + PARAMS, shell=True)
         GUI.POWER_PROFILE_LABEL.set_text("Power Profile: Power Saver")
 
-    if pygame.joystick.Joystick(event.instance_id) and controller_type == "Xbox 360" and pygame.JOYAXISMOTION and event.axis == 5:
+    if pygame.joystick.Joystick(event.instance_id) and controller_type == "Xbox 360" and pygame.JOYAXISMOTION and event.axis == 2:
         PARAMS = MAX_PERFORMANCE
         subprocess.run(RYZENADJ + ' ' + PARAMS, shell=True)
         GUI.POWER_PROFILE_LABEL.set_text("Power Profile: Performance")
 
-    if pygame.joystick.Joystick(event.instance_id) and controller_type == "Xbox 360" and pygame.JOYAXISMOTION and event.axis == 2:
+    if pygame.joystick.Joystick(event.instance_id) and controller_type == "Xbox 360" and pygame.JOYAXISMOTION and event.axis == 5:
         PARAMS = POWER_SAVER
         subprocess.run(RYZENADJ + ' ' + PARAMS, shell=True)
         GUI.POWER_PROFILE_LABEL.set_text("Power Profile: Power Saver")
