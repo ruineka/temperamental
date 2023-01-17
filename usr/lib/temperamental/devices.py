@@ -57,7 +57,7 @@ elif system_id == "AIR":
     QUIET_FAN_CONFIG = ""
     BALANCED_FAN_CONFIG = ""
     PERF_FAN_CONFIG = ""
-elif system_id == "AIR PRO":
+elif system_id == "AIR Pro":
     SYSTEM_NAME = "AYA NEO AIR"
     MIN_TDP = "5000"
     STEP_ONE = "10000"
@@ -83,8 +83,8 @@ elif system_id in (
     PERF_FAN_CONFIG = ""
 elif system_id in (
         "AYANEO NEXT",
-        "AYANEO NEXT PRO",
-        "NEXT PRO",
+        "AYANEO NEXT Pro",
+        "NEXT Pro",
         "NEXT"
 ):
     SYSTEM_NAME = "AYA NEO NEXT"
