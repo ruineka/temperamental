@@ -3,6 +3,7 @@ from pyglet.window import Window
 from pyglet.graphics import Batch
 from pyglet.sprite import Sprite
 from pyglet.gui import PushButton
+from .boost_manager import (EnableBoostHelper, DisableBoostHelper)
 
 pyglet.resource.path = [ 'assets/images' ]
 pyglet.resource.reindex()
@@ -10,7 +11,11 @@ pyglet.resource.reindex()
 class HelperButton(PushButton):
     """A button tied to a helper function."""
 
-    def __init__(self, x, y, width, height, label="Button", helper=None, font_size=10, *args, **kwargs):
+    def __init__(self, x, y, width, height,
+                 label="Button",
+                 helper=None,
+                 font_size=10,
+                 *args, **kwargs):
         self.pressed_img = pyglet.image.SolidColorImagePattern(
             color=(150, 150, 150, 220)
         ).create_image(width, height)
@@ -35,7 +40,7 @@ class HelperButton(PushButton):
                                        group=pyglet.graphics.Group(order=4))
 
     def on_press(self):
-        #TODO: Remove this behaviout when there is actual helpers
+        #TODO: Remove this behaviour when there is actual helpers
         if not self.helper:
             print(f"Button '{self.label.text}' pressed but doesnt have any helper.")
         else:
@@ -84,22 +89,26 @@ class TemperamentalMainGUI(Window):
 
         #TODO: Setup helpers for each button
         # ABXY PAD:
+        self.enable_boost_helper = EnableBoostHelper()
         self.tdp_button_a = HelperButton(self.width // 2 + 580,
                                          self.height // 2 + 30,
-                                         100,
+                                         200,
                                          40,
+                                         helper=self.enable_boost_helper,
                                          font_size=15,
-                                         label="TDP A",
+                                         label="BOOST ENABLE",
                                          batch=self.batch
                                         )
         self.frame.add_widget(self.tdp_button_a)
 
+        self.disbable_boost_helper = DisableBoostHelper()
         self.tdp_button_b = HelperButton(self.width // 2 + 580,
                                          self.height // 2 + 100,
-                                         100,
+                                         200,
                                          40,
+                                         helper=self.disbable_boost_helper,
                                          font_size=15,
-                                         label="TDP B",
+                                         label="DISABLE BOOST",
                                          batch=self.batch
                                         )
         self.frame.add_widget(self.tdp_button_b)
